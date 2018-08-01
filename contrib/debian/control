@@ -1,0 +1,68 @@
+Source: resq
+Section: utils
+Priority: optional
+Maintainer: Holger Schinzel <holger@resqcoin.info>
+Uploaders: Holger Schinzel <holger@resqcoin.info>
+Build-Depends: debhelper,
+ devscripts,
+ automake,
+ libtool,
+ bash-completion,
+ libdb4.8++-dev,
+ libssl-dev,
+ pkg-config,
+ libevent-dev,
+ libboost-system1.48-dev | libboost-system-dev (>> 1.35),
+ libboost-filesystem1.48-dev | libboost-filesystem-dev (>> 1.35),
+ libboost-program-options1.48-dev | libboost-program-options-dev (>> 1.35),
+ libboost-thread1.48-dev | libboost-thread-dev (>> 1.35),
+ libboost-test1.48-dev | libboost-test-dev (>> 1.35),
+ libboost-chrono1.48-dev | libboost-chrono-dev (>> 1.35),
+ qt4-qmake,
+ libqt4-dev,
+ libqrencode-dev,
+ libprotobuf-dev, protobuf-compiler,
+ python
+Standards-Version: 3.9.2
+Homepage: https://resqcoin.io/
+Vcs-Git: git://github.com/resqcoin/resqcoin.git
+Vcs-Browser: https://github.com/resqcoin/resqcoin
+
+Package: resqd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - daemon
+ Resq is an experimental new digital currency that enables anonymous, instant
+ payments to anyone, anywhere in the world. Resq uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. Resq Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides the daemon, resqd, and the CLI tool
+ resq-cli to interact with the daemon.
+
+Package: resq-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - Qt GUI
+ Resq is an experimental new digital currency that enables anonymous, instant
+ payments to anyone, anywhere in the world. Resq uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. Resq Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides Resq-Qt, a GUI for Resq based on Qt.
+
+Package: resq-tx
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer digital currency - standalone transaction tool
+ Resq is an experimental new digital currency that enables anonymous, instant
+ payments to anyone, anywhere in the world. Resq uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. Resq Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides resq-tx, a command-line transaction creation
+ tool which can be used without a resq daemon.  Some means of
+ exchanging minimal transaction data with peers is still required.

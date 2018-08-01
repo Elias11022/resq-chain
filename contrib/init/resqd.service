@@ -1,0 +1,22 @@
+[Unit]
+Description=Resq's distributed currency daemon
+After=network.target
+
+[Service]
+User=resqcore
+Group=resqcore
+
+Type=forking
+PIDFile=/var/lib/resqd/resqd.pid
+ExecStart=/usr/bin/resqd -daemon -pid=/var/lib/resqd/resqd.pid \
+-conf=/etc/resqcore/resq.conf -datadir=/var/lib/resqd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
