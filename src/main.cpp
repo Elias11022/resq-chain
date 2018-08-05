@@ -1746,13 +1746,31 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
     if (nPrevHeight == 0) {
-        return 3400000 * COIN;
+        return 25000000 * COIN;
     }
-    if (nPrevHeight < 800) {
-	return 0 * COIN;
+    if (nPrevHeight < 250) {
+        return 50 * COIN;
+    }
+    if (nPrevHeight < 1000000) {
+        return 1000 * COIN;
+    }
+    if (nPrevHeight < 3000000) {
+        return 800 * COIN;
+    }
+    if (nPrevHeight < 5000000) {
+        return 600 * COIN;
+    }
+    if (nPrevHeight < 7000000) {
+        return 400 * COIN;
+    }
+    if (nPrevHeight < 9000000) {
+        return 200 * COIN;
+    }
+    if (nPrevHeight < 10000000) {
+        return 100 * COIN;
     }
 
-    CAmount nSubsidy = 50 * COIN;
+    CAmount nSubsidy = 0 * COIN;
 
     // yearly decline of production by 25% per 3 months.
     for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
@@ -1764,9 +1782,34 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    return blockValue * 0.40;
-}
+    if (nHeight < 250) {
+        return blockValue * 0.20;
+    }
+    if (nHeight < 500000) {
+        return blockValue * 0.40;
+    }
+    if (nHeight < 1000000) {
+        return blockValue * 0.50;
+    }
+    if (nHeight < 2000000) {
+        return blockValue * 0.5625;
+    }
+    if (nHeight < 4000000) {
+        return blockValue * 0.65;
+    }
+    if (nHeight < 5000000) {
+        return blockValue * 0.70;
+    }
+    if (nHeight < 7000000) {
+        return blockValue * 0.65;
+    }
+    if (nHeight < 10000000) {
+        return blockValue * 0.60;
+    }
 
+    return blockValue * 0.50;
+
+}
 bool IsInitialBlockDownload()
 {
     static bool lockIBDState = false;

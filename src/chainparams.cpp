@@ -65,7 +65,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 60000; // every130k blocks
+        consensus.nSubsidyHalvingInterval = 2100000000; // year 10000+
         consensus.nMasternodePaymentsStartBlock = 2; // block after premine
         consensus.nMasternodePaymentsIncreaseBlock = 158000000; // not used
         consensus.nMasternodePaymentsIncreasePeriod = 576*30; // not used
@@ -86,7 +86,7 @@ public:
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"); // FIX
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowTargetTimespan = 2 * 60; // Resq: every blocks
-        consensus.nPowTargetSpacing = 1 * 150; // Resq: 2 minutes
+        consensus.nPowTargetSpacing = 1 * 150; // Resq: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -110,11 +110,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x6a;
-        pchMessageStart[1] = 0xb1;
-        pchMessageStart[2] = 0x9c;
+        pchMessageStart[0] = 0x5a;
+        pchMessageStart[1] = 0xb2;
+        pchMessageStart[2] = 0x8c;
         pchMessageStart[3] = 0xd5;
-        vAlertPubKey = ParseHex("044513449073a8efe161dc42e7c07c61c4a8f59297dc8ebacbc2f77345084d058399022bc6a0db0719739f183d14b04893fb78c3b9bd9a3f88ecf8ea06adae99fe");
+        vAlertPubKey = ParseHex("043f99eed9f501b49f024e670528ea40f5280f12e8cb18ad857b94d88228fe64284199aa5626ef4c451e006edaa1285740aeee77efb050038eac7dac0ecd0b7177");
         nDefaultPort = 19998;
         nMaxTipAge = 1.5 * 60 * 60; // ~36 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
         nPruneAfterHeight = 100000;
@@ -179,7 +179,7 @@ public:
         // Resq BIP44 coin type is '5'
         base58Prefixes[EXT_COIN_TYPE]  = boost::assign::list_of(0x80)(0x00)(0x00)(0x05).convert_to_container<std::vector<unsigned char> >();
 
-        fMiningRequiresPeers = false;
+        fMiningRequiresPeers = true;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
@@ -187,7 +187,7 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
-        strSporkPubKey = "04d9491a6cf40a2afaf51de3939eadca259a95843b637f82c772a5719bc64051409031803a1c33f1f9b14c24a2d6937fe5b76ffa99a9730aa27726f9934cabf7f4";
+        strSporkPubKey = "0452c38e567be58f1eb6ee1fe4b566731681709af92c48e3eee9743095902d777904640c834b0556dd67f777ebf22bdcb52f5d1298abb1664ed2b93734fcb52391";
         strMasternodePaymentsPubKey = "041fda8a1eff0a55d4d5c2d10f426e9c204d8faa228e3bbbaccd716a0db59bbfbe15dc17975f41e554ad551316b97586ddf5bec909a9fc3fc36c17a9611294fcf8";
 
         checkpointData = (CCheckpointData) {
