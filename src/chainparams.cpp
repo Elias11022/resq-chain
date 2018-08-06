@@ -46,7 +46,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "1/8/2018 The devs have left the building";
+    const char* pszTimestamp = "6/8/2018 The devs have left the building";
     const CScript genesisOutputScript = CScript() << ParseHex("040a3ada5ba6280b99f49a92ba47221e6a72af844ec49d0c8bbdae1ec09a4c79b22e42eefe670ae04490556f91780eb57de76493d020c91d0c421c2fa052b28a2b") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -86,7 +86,7 @@ public:
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"); // FIX
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowTargetTimespan = 2 * 60; // Resq: every blocks
-        consensus.nPowTargetSpacing = 1 * 150; // Resq: 2.5 minutes
+        consensus.nPowTargetSpacing = 1 * 30; // Resq: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -119,7 +119,7 @@ public:
         nMaxTipAge = 1.5 * 60 * 60; // ~36 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1533072045, 218102, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1533537454, 15289, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 /*   
 	 //////////////
@@ -162,8 +162,8 @@ public:
                 }
                 std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
 */        
-        assert(consensus.hashGenesisBlock == uint256S("000003c5320e744da7d0b07112680ab1a0f3575403112485ec7a4971326041ff"));
-        assert(genesis.hashMerkleRoot == uint256S("baaf4fcf7416e492dac41b9012e7a71ccd313d7490a1ae6b3e0e254e69424ed6"));
+        assert(consensus.hashGenesisBlock == uint256S("000002c5e89cba80df705d18839947309c1ff10f3510b7e78e24cf2a33d4068b"));
+        assert(genesis.hashMerkleRoot == uint256S("1fb32b173c824802d4fa635a9bb7357d0b6c3226c465b65aa50c4e3aebc38942"));
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.resqchain.org"));
         vSeeds.push_back(CDNSSeedData("seed2", "seed2.resqchain.org"));
         // Resq addresses start with 'R'
@@ -192,8 +192,8 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("00000a8144601b679fc258d5aba342076e89e81573676eda958f75ff0a0a8561")),
-            1523764584, // * UNIX timestamp of last checkpoint block
+            ( 0, uint256S("000002c5e89cba80df705d18839947309c1ff10f3510b7e78e24cf2a33d4068b")),
+            1533537454, // * UNIX timestamp of last checkpoint block
             0,          // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             500	        // * estimated number of transactions per day after checkpoint
