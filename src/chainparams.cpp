@@ -119,7 +119,7 @@ public:
         nMaxTipAge = 1.5 * 60 * 60; // ~36 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1533878173, 15289, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1533878173, 4405461, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 /*   
 	 //////////////
@@ -162,10 +162,12 @@ public:
                 }
                 std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
 */        
-        assert(consensus.hashGenesisBlock == uint256S("000002c5e89cba80df705d18839947309c1ff10f3510b7e78e24cf2a33d4068b"));
-        assert(genesis.hashMerkleRoot == uint256S("1fb32b173c824802d4fa635a9bb7357d0b6c3226c465b65aa50c4e3aebc38942"));
+        assert(consensus.hashGenesisBlock == uint256S("00000b8768ec963f483fe9c9ab704d2132ce8fadff668a28835e54e570007321"));
+        assert(genesis.hashMerkleRoot == uint256S("17d9bd0c628aa04a5c18e1c89df8e0c14fe01bebe652fc813cd216a120709de0"));
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.resqchain.org"));
         vSeeds.push_back(CDNSSeedData("seed2", "seed2.resqchain.org"));
+        vSeeds.push_back(CDNSSeedData("seed3", "seed3.resqchain.org"));
+        vSeeds.push_back(CDNSSeedData("explorer", "explorer.resqchain.org"));
         // Resq addresses start with 'Q'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,58);
         // Resq script addresses start with '7'
