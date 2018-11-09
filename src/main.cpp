@@ -1748,25 +1748,25 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     if (nPrevHeight == 0) {
         return 25000000 * COIN;
     }
-    if (nPrevHeight < 250) {
+    else if (nPrevHeight < 250) {
         return 50 * COIN;
     }
-    if (nPrevHeight < 1000000) {
+    else if (nPrevHeight < 100000) {
         return 1000 * COIN;
     }
-    if (nPrevHeight < 3000000) {
+    else if (nPrevHeight < 300000) {
         return 800 * COIN;
     }
-    if (nPrevHeight < 5000000) {
+    else if (nPrevHeight < 500000) {
         return 600 * COIN;
     }
-    if (nPrevHeight < 7000000) {
+    else if (nPrevHeight < 700000) {
         return 400 * COIN;
     }
-    if (nPrevHeight < 9000000) {
+    else if (nPrevHeight < 900000) {
         return 200 * COIN;
     }
-    if (nPrevHeight < 10000000) {
+    else if (nPrevHeight < 1000000) {
         return 100 * COIN;
     }
 
@@ -1785,25 +1785,25 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     if (nHeight < 250) {
         return blockValue * 0.20;
     }
-    if (nHeight < 500000) {
+    if (nHeight < 55501) {
         return blockValue * 0.40;
     }
-    if (nHeight < 1000000) {
+    if (nHeight < 100001) {
         return blockValue * 0.50;
     }
-    if (nHeight < 2000000) {
+    if (nHeight < 200001) {
         return blockValue * 0.5625;
     }
-    if (nHeight < 4000000) {
+    if (nHeight < 400001) {
         return blockValue * 0.65;
     }
-    if (nHeight < 5000000) {
+    if (nHeight < 500001) {
         return blockValue * 0.70;
     }
-    if (nHeight < 7000000) {
+    if (nHeight < 700001) {
         return blockValue * 0.65;
     }
-    if (nHeight < 10000000) {
+    if (nHeight < 1000001) {
         return blockValue * 0.60;
     }
 
@@ -5375,12 +5375,20 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+        // if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+        int minproto;
+	       if(sporkManager.IsSporkActive(SPORK_15_KILL_BAD_PEER)) {
+		         minproto = 70207;
+		         }
+	            else {
+		              minproto = 70206;
+	               }
+        if (pfrom->nVersion < minproto)
         {
             // disconnect from peers older than this proto version
             LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
             pfrom->PushMessage(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
-                               strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION));
+                               strprintf("Version must be %d or greater", minproto));
             pfrom->fDisconnect = true;
             return false;
         }

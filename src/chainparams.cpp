@@ -121,7 +121,7 @@ public:
 
         genesis = CreateGenesisBlock(1533878173, 4405461, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-/*   
+/*
 	 //////////////
         //////////////
                 // calculate Genesis Block
@@ -161,7 +161,7 @@ public:
                     // Mainnet --- nonce: 296277 time: 1390095618 hash: 000000bdd771b14e5a031806292305e563956ce2584278de414d9965f6ab54b0
                 }
                 std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
-*/        
+*/
         assert(consensus.hashGenesisBlock == uint256S("00000b8768ec963f483fe9c9ab704d2132ce8fadff668a28835e54e570007321"));
         assert(genesis.hashMerkleRoot == uint256S("17d9bd0c628aa04a5c18e1c89df8e0c14fe01bebe652fc813cd216a120709de0"));
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.resqchain.org"));
@@ -189,13 +189,13 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
-        strSporkPubKey = "0452c38e567be58f1eb6ee1fe4b566731681709af92c48e3eee9743095902d777904640c834b0556dd67f777ebf22bdcb52f5d1298abb1664ed2b93734fcb52391";
+        strSporkPubKey = "02e97e552af66e851302f6c948397a006374977fbd5409c034f44d91af53e5e999";
         strMasternodePaymentsPubKey = "041fda8a1eff0a55d4d5c2d10f426e9c204d8faa228e3bbbaccd716a0db59bbfbe15dc17975f41e554ad551316b97586ddf5bec909a9fc3fc36c17a9611294fcf8";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("000002c5e89cba80df705d18839947309c1ff10f3510b7e78e24cf2a33d4068b")),
-            1533537454, // * UNIX timestamp of last checkpoint block
+            ( 0, uint256S("00000b8768ec963f483fe9c9ab704d2132ce8fadff668a28835e54e570007321")),
+            1533878173, // * UNIX timestamp of last checkpoint block
             0,          // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             500	        // * estimated number of transactions per day after checkpoint

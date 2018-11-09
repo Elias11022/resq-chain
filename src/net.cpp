@@ -12,6 +12,7 @@
 
 #include "net.h"
 
+#include "spork.h"
 #include "addrman.h"
 #include "chainparams.h"
 #include "clientversion.h"
@@ -2137,8 +2138,14 @@ void RelayTransaction(const CTransaction& tx, const CDataStream& ss)
 
 void RelayInv(CInv &inv, const int minProtoVersion) {
     LOCK(cs_vNodes);
+    int minpeer;
+      if(sporkManager.IsSporkActive(SPORK_15_KILL_BAD_PEER)) {
+	       minpeer=70207;
+       } else{
+	        minpeer=70206;
+        }
     BOOST_FOREACH(CNode* pnode, vNodes)
-        if(pnode->nVersion >= minProtoVersion)
+        if(pnode->nVersion >= minpeer)
             pnode->PushInventory(inv);
 }
 
@@ -2687,14 +2694,14 @@ bool CBanDB::Read(banmap_t& banSet)
         // ... verify the network matches ours
         if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
             return error("%s: Invalid network magic number", __func__);
-        
+
         // de-serialize address data into one CAddrMan object
         ssBanlist >> banSet;
     }
     catch (const std::exception& e) {
         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
     }
-    
+
     return true;
 }
 
